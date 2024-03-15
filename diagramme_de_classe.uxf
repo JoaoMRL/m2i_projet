@@ -1,0 +1,66 @@
+<diagram program="umletino" version="15.1"><zoom_level>10</zoom_level><help_text>Space for diagram notes</help_text><element><id>UMLClass</id><coordinates><x>130</x><y>0</y><w>210</w><h>260</h></coordinates><panel_attributes>_Users_
+--
+- id: Int
+- name: str
+- firstName: str
+- address: str
+- email: str
+- password : str
+- role: str
+- phoneNumber: str
+- avatar: str
+--
++AddUser()
++Login()
++Update()
++getUserById()
++getUserByEmail()
++getUsers()</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>150</x><y>640</y><w>210</w><h>220</h></coordinates><panel_attributes>_Annonces_
+--
+- id: int
+- name: str
+- type: str
+- msg: str
+- owner : int
+- status: str
+--
++getAnnonces()
++getAnnonceById()
++addAnnonce()
++deleteAnnonce()
++updateAnnonce()
++searchAnnonce()
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>310</x><y>250</y><w>40</w><h>410</h></coordinates><panel_attributes>m1=1
+m2=x</panel_attributes><additional_attributes>10;10;10;390</additional_attributes></element><element><id>Relation</id><coordinates><x>90</x><y>60</y><w>60</w><h>310</h></coordinates><panel_attributes>m1=1
+m2=x</panel_attributes><additional_attributes>40;10;10;10;10;290</additional_attributes></element><element><id>UMLClass</id><coordinates><x>60</x><y>930</y><w>210</w><h>220</h></coordinates><panel_attributes>_Emprunts_
+--
+- id: int
+- status : str
+- dateDebut: str/date
+- dateFin: str/date
+- msgEmprunts: str
+- idAnnonces
+- borrower: int
+--
++getEmprunts()
++getEmpruntsById()
++deleteEmprunt()
++updateEmprunt()
++addEmprunt()</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>90</x><y>350</y><w>210</w><h>190</h></coordinates><panel_attributes>_Objets_
+--
+- id: int
+- name: str
+- description: str
+- owner: int
+- img:str
+--
++addObjet()
++getObjetById()
++getObjetByUser()
++deleteObjet()
++updateObjet()</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>230</x><y>530</y><w>30</w><h>130</h></coordinates><panel_attributes>m1=x
+m2=x</panel_attributes><additional_attributes>10;110;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>0</x><y>30</y><w>150</w><h>990</h></coordinates><panel_attributes>m1=x
+m2=1</panel_attributes><additional_attributes>60;970;10;930;20;10;130;10</additional_attributes></element><element><id>Relation</id><coordinates><x>90</x><y>530</y><w>30</w><h>420</h></coordinates><panel_attributes>m1=x
+m2=x</panel_attributes><additional_attributes>10;400;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>250</x><y>850</y><w>40</w><h>100</h></coordinates><panel_attributes>m1=x
+m2=1</panel_attributes><additional_attributes>10;80;10;10</additional_attributes></element></diagram>
