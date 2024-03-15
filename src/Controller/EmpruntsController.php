@@ -31,7 +31,16 @@ class EmpruntsController extends AbstractController{
 
         return $this->json($emprunt);
     }
-    #[Route('/search/annonce/{term}', methods: 'GET')]
+
+    #[Route('/user/{id}', methods:'GET')]
+    public function oneByUser(int $id):JsonResponse{
+        $emprunt = $this->repo->findByUserId($id);
+        if ($emprunt == null) {
+            return $this->json('Emprunts Not Found !',404);
+        }
+        return $this->json($emprunt);
+    }
+    #[Route('/search/{term}', methods: 'GET')]
     public function search(string $term): JsonResponse
     {
         return $this->json($this->repo->search($term));

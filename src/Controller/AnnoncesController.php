@@ -29,6 +29,14 @@ class AnnoncesController extends AbstractController{
         }
         return $this->json($annonce);
     }
+    #[Route('/user/{id}', methods:'GET')]
+    public function oneByUser(int $id):JsonResponse{
+        $annonce = $this->repo->findByUserId($id);
+        if ($annonce == null) {
+            return $this->json('Annonce Not Found !',404);
+        }
+        return $this->json($annonce);
+    }
 
     #[Route('/search/{term}', methods: 'GET')]
     public function search(string $term): JsonResponse

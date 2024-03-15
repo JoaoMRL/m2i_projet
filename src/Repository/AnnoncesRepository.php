@@ -57,6 +57,33 @@ class AnnoncesRepository{
     }
 
     /**
+     * @return Annonces[] Tableau d'objets de l'user 
+     */
+    public function findByUserId(int $id):array{
+        $list=[];
+        $connect = Database::getCo();
+        $req= "SELECT annonces.*, annonces.id AS annonce_id, users.id AS user_id,
+        objets.id AS objet_id,  annonces.name AS annonce_name,users.name AS user_name,
+        objets.name AS objet_name, annonces.owner AS annonce_owner, objets.owner AS objet_owner,
+        users.firstName,users.address, users.email, users.phoneNumber, users.avatar,
+        objets.description, objets.image 
+        FROM annonces LEFT JOIN users ON annonces.owner = users.id 
+        WHERE annonces.owner = :id";
+
+        $query = $connect->prepare($req);
+        $query->bindValue(":id", $id);
+        $query->execute();
+
+        foreach($query->fetchAll() as $line){
+            $annonce = new Annonces($line['name'],$line['type'],$line['msg'],$line['owner'],$line['idObjet'],$line['status'],$line['id']);
+            $annonce->setTheOwner(["ownerName"=>$line['user_name'],"ownerFirstName"=>$line['firstName'],"ownerAddress"=>$line['address'],"ownerEmail"=>$line['email'], "ownerPhoneNumber"=>$line['phoneNumber'],"ownerAvatar"=>$line["avatar"]]);
+            $annonce->setTheObjet(["objetName"=>$line['objet_name'],"objetDescription"=>$line['description'],"objetImg"=>$line['image']]);
+            $list[]= $annonce;
+        }
+        return $list;
+    }
+
+    /**
      * Search Annonce
     */
     public function search(string $term):array{
