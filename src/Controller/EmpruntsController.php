@@ -31,6 +31,11 @@ class EmpruntsController extends AbstractController{
 
         return $this->json($emprunt);
     }
+    #[Route('/search/annonce/{term}', methods: 'GET')]
+    public function search(string $term): JsonResponse
+    {
+        return $this->json($this->repo->search($term));
+    }
 
     #[Route(methods: 'POST')]
     public function persist(Request $request, SerializerInterface $serializer, ValidatorInterface $validator):JsonResponse{

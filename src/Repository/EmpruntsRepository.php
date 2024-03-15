@@ -41,6 +41,29 @@ class EmpruntsRepository{
     }
 
     /**
+     * Search Annonce
+    */
+    public function search(string $term):array{
+        $list = [];
+        $connect = Database::getCo();
+        $req = "SELECT * FROM annonces WHERE name LIKE :term";
+
+        $query = $connect->prepare($req);
+        $query->bindValue(":term", $term);
+        $query->execute();
+
+        foreach($query->fetchAll() as $line){
+            $emprunt= new Emprunts($line['status'],new DateTime($line['dateDebut']),new DateTime($line['dateFin']),$line['msgEmprunts'],$line['idAnnonces'],$line['borrower'],$line['id']);
+            $emprunt->setTheBorrower(["borrowerName"=>$line['user_name'],"borrowerFirstName"=>$line['firstName'],"borrowerAddress"=>$line['address'],"borrowerEmail"=>$line['email'], "borrowerPhoneNumber"=>$line['phoneNumber'],"borrowerAvatar"=>$line["avatar"]]);
+            $emprunt->setTheAnnonce([["annonceName"=>$line["annonce_name"],"annonceType"=>$line["type"],"annonceMessage"=>$line["msg"],"annonceStatus"=>$line["annonce_status"]],
+            ["objetName"=>$line['objet_name'],"objetDescription"=>$line['description'],"objetImg"=>$line['image'], "type"=>$line["type"],"objetId"=>$line["objet_id"]], 
+            ["ownerName"=>$line['annonce_owner_name'],"ownerFirstName"=>$line['annonce_owner_firstName'],"ownerAddress"=>$line['annonce_owner_address'],"ownerEmail"=>$line['annonce_owner_email'],"ownerPhoneNumber"=>$line['annonce_owner_phoneNumber'],"ownerAvatar"=>$line["annonce_owner_avatar"],"ownerId"=>$line["annonce_owner_id"]]]);
+            $list[]= $emprunt;
+        }
+        return $list;
+    }
+
+    /**
      * @return Emprunts
      */
     public function findById(int $id):?Emprunts{

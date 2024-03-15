@@ -51,6 +51,23 @@ class ObjetsRepository{
 
         return $list;
     }
+    public function search(string $term):array{
+        $list = [];
+        $connect = Database::getCo();
+        $req = "SELECT * FROM objets WHERE name LIKE :term";
+
+        $query = $connect->prepare($req);
+        $query->bindValue(":term", $term);
+        $query->execute();
+
+        foreach ($query->fetchAll() as $line) {
+            $objet= new Objet($line['objet_name'],$line['description'],$line['owner'],$line['objet_id'],$line['image'],);
+            $objet->setTheOwner(["ownerName"=>$line['user_name'],"ownerFirstName"=>$line['firstName'],"ownerAddress"=>$line['address'],"ownerEmail"=>$line['email']]);
+            $list[]=$objet;
+        }
+
+        return $list;
+    }
 
     /**
      * Ajoute un Objet

@@ -33,6 +33,12 @@ class ObjetsController extends AbstractController{
         return $this->json($objets);
     }
 
+    #[Route('/search/object/{term}', methods: 'GET')]
+    public function search(string $term): JsonResponse
+    {
+        return $this->json($this->repo->search($term));
+    }
+
     #[Route(methods:'POST')]
     public function persist(Request $request, SerializerInterface $serializer, ValidatorInterface $validator):JsonResponse{
         try {
