@@ -36,7 +36,6 @@ security:
         - { path: ^/api/protected, roles: IS_AUTHENTICATED_FULLY }
         - { path: /api/user, roles: IS_AUTHENTICATED_FULLY, methods: [GET] }
         - { path: /api/user, roles: PUBLIC_ACCESS, methods: [POST] }
-        # - { path: ^/api/login, roles: PUBLIC_ACCESS }
         - { path: ^/api/objets, roles: ROLE_USER }
         - { path: ^/api/user, roles: ROLE_USER }
         - { path: ^/api/annonces, roles: ROLE_USER }

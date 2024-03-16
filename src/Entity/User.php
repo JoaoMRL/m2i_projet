@@ -8,9 +8,23 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface{
     // class User implements UserInterface, PasswordAuthenticatedUserInterface{
    
     public function __construct(
+        #[Assert\NotBlank]
+        #[Assert\NoSuspiciousCharacters]
+        #[Assert\Regex(
+            pattern: '/\d/',
+            match: false,
+            message: 'Your name cannot contain a number',
+        )]
         private string $name,
+        #[Assert\NotBlank]
+        #[Assert\NoSuspiciousCharacters]
+        #[Assert\Regex(
+            pattern: '/\d/',
+            match: false,
+            message: 'Your name cannot contain a number',
+        )]
         private string $firstName,
-        private string $address,
+        private ?string $address,
         #[Assert\Email]
         #[Assert\NotBlank]
         private string $email,

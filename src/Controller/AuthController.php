@@ -14,7 +14,8 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class AuthController extends AbstractController{
     #[Route('/api/user',methods:'POST')]
-    public function index(UserRepository $repo,Request $request, SerializerInterface $serializer, UserPasswordHasherInterface $hasher, ValidatorInterface $validator):JsonResponse{
+    public function index(UserRepository $repo,Request $request, SerializerInterface $serializer, 
+    UserPasswordHasherInterface $hasher, ValidatorInterface $validator):JsonResponse{
         try {
             $user = $serializer->deserialize($request->getContent(), User::class, 'json');
         } catch (\Exception $e) {
