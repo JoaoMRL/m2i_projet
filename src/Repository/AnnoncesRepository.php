@@ -68,6 +68,7 @@ class AnnoncesRepository{
         users.firstName,users.address, users.email, users.phoneNumber, users.avatar,
         objets.description, objets.image 
         FROM annonces LEFT JOIN users ON annonces.owner = users.id 
+        LEFT JOIN objets ON annonces.idObjet = objets.id 
         WHERE annonces.owner = :id";
 
         $query = $connect->prepare($req);

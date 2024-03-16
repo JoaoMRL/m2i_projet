@@ -61,7 +61,7 @@ class EmpruntsRepository{
         LEFT JOIN users ON emprunts.borrower = users.id
         LEFT JOIN objets ON objets.id = annonces.idObjet
         LEFT JOIN users AS annonce_owner_user ON annonce_owner_user.id = annonces.owner
-        WHERE annonce_owner_user.id = :id";
+        WHERE annonces.owner = :id";
 
         $query = $connect->prepare($req);
         $query->bindValue(":id", $id);
