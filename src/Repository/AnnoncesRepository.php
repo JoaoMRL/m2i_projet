@@ -22,7 +22,9 @@ class AnnoncesRepository{
 
         foreach($query->fetchAll() as $line){
             $annonce = new Annonces($line['name'],$line['type'],$line['msg'],$line['owner'],$line['idObjet'],$line['status'],$line['id']);
-            $annonce->setTheOwner(["ownerName"=>$line['user_name'],"ownerFirstName"=>$line['firstName'],"ownerAddress"=>$line['address'],"ownerEmail"=>$line['email'], "ownerPhoneNumber"=>$line['phoneNumber'],"ownerAvatar"=>$line["avatar"]]);
+            $annonce->setTheOwner(["ownerName"=>$line['user_name'],"ownerFirstName"=>$line['firstName'],
+            "ownerAddress"=>$line['address'],"ownerEmail"=>$line['email'], 
+            "ownerPhoneNumber"=>$line['phoneNumber'],"ownerAvatar"=>$line["avatar"]]);
             $annonce->setTheObjet(["objetName"=>$line['objet_name'],"objetDescription"=>$line['description'],"objetImg"=>$line['image']]);
             $list[]= $annonce;
         }
@@ -49,7 +51,8 @@ class AnnoncesRepository{
 
         foreach($query->fetchAll() as $line){
             $annonce = new Annonces($line['name'],$line['type'],$line['msg'],$line['owner'],$line['idObjet'],$line['status'],$line['id']);
-            $annonce->setTheOwner(["ownerName"=>$line['user_name'],"ownerFirstName"=>$line['firstName'],"ownerAddress"=>$line['address'],"ownerEmail"=>$line['email'], "ownerPhoneNumber"=>$line['phoneNumber'],"ownerAvatar"=>$line["avatar"]]);
+            $annonce->setTheOwner(["ownerName"=>$line['user_name'],"ownerFirstName"=>$line['firstName'],
+            "ownerAddress"=>$line['address'],"ownerEmail"=>$line['email'], "ownerPhoneNumber"=>$line['phoneNumber'],"ownerAvatar"=>$line["avatar"]]);
             $annonce->setTheObjet(["objetName"=>$line['objet_name'],"objetDescription"=>$line['description'],"objetImg"=>$line['image']]);
             return $annonce;
         }
@@ -93,7 +96,7 @@ class AnnoncesRepository{
         $req = "SELECT * FROM annonces WHERE name LIKE :term";
 
         $query = $connect->prepare($req);
-        $query->bindValue(":term", $term);
+        $query->bindValue(":term", '%' . $term . '%');
         $query->execute();
 
         foreach($query->fetchAll() as $line){

@@ -57,7 +57,7 @@ class ObjetsRepository{
         $req = "SELECT * FROM objets WHERE name LIKE :term";
 
         $query = $connect->prepare($req);
-        $query->bindValue(":term", $term);
+        $query->bindValue(":term",  '%' . $term . '%');
         $query->execute();
 
         foreach ($query->fetchAll() as $line) {

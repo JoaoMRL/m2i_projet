@@ -87,7 +87,7 @@ class EmpruntsRepository{
         $req = "SELECT * FROM annonces WHERE name LIKE :term";
 
         $query = $connect->prepare($req);
-        $query->bindValue(":term", $term);
+        $query->bindValue(":term", '%' . $term . '%');
         $query->execute();
 
         foreach($query->fetchAll() as $line){
